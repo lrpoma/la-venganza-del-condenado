@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://glfk0juqcax4"]
+
+[ext_resource type="Script" uid="uid://btw6lhwp8mn0y" path="res://scenes/levels/level.gd" id="1_4tcl0"]
+[ext_resource type="PackedScene" uid="uid://7p850f5y4bfk" path="res://scenes/player/Player.tscn" id="1_x6ivy"]
+[ext_resource type="Script" uid="uid://bf2rc6hlv4x4x" path="res://scenes/levels/salt_zone.gd" id="2_dd0lh"]
+
+[node name="Level1" type="Node2D" unique_id=50367844]
+script = ExtResource("1_4tcl0")
+
+[node name="TerrainLayer" type="TileMapLayer" parent="." unique_id=528539623]
+
+[node name="SaltPaths" type="Node2D" parent="." unique_id=170399767]
+
+[node name="SaltZone1" type="Area2D" parent="SaltPaths" unique_id=334024555]
+script = ExtResource("2_dd0lh")
+
+[node name="SaltZone2" type="Area2D" parent="SaltPaths" unique_id=409490923]
+script = ExtResource("2_dd0lh")
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=461948301]
+
+[node name="Player" parent="." unique_id=1318801478 instance=ExtResource("1_x6ivy")]
+
+[node name="EnemySpawns" type="Node2D" parent="." unique_id=330915556]
+
+[node name="NPCSpawns" type="Node2D" parent="." unique_id=847114515]
+
+[node name="HUDLayer" type="CanvasLayer" parent="." unique_id=1795297538]
