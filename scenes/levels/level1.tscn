@@ -3,6 +3,15 @@
 [ext_resource type="Script" uid="uid://btw6lhwp8mn0y" path="res://scenes/levels/level.gd" id="1_4tcl0"]
 [ext_resource type="PackedScene" uid="uid://7p850f5y4bfk" path="res://scenes/player/Player.tscn" id="1_x6ivy"]
 [ext_resource type="Script" uid="uid://bf2rc6hlv4x4x" path="res://scenes/levels/salt_zone.gd" id="2_dd0lh"]
+[ext_resource type="Script" uid="uid://r1f82iruvhl7" path="res://resources/spiritual_energy.gd" id="4_bfxgj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j65aw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmvmn"]
+
+[sub_resource type="Resource" id="Resource_dd0lh"]
+script = ExtResource("4_bfxgj")
+metadata/_custom_type_script = "uid://r1f82iruvhl7"
 
 [node name="Level1" type="Node2D" unique_id=50367844]
 script = ExtResource("1_4tcl0")
@@ -14,12 +23,21 @@ script = ExtResource("1_4tcl0")
 [node name="SaltZone1" type="Area2D" parent="SaltPaths" unique_id=334024555]
 script = ExtResource("2_dd0lh")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaltPaths/SaltZone1" unique_id=473481486]
+shape = SubResource("RectangleShape2D_j65aw")
+
 [node name="SaltZone2" type="Area2D" parent="SaltPaths" unique_id=409490923]
 script = ExtResource("2_dd0lh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaltPaths/SaltZone2" unique_id=1928452393]
+shape = SubResource("RectangleShape2D_pmvmn")
 
 [node name="PlayerSpawn" type="Marker2D" parent="." unique_id=461948301]
 
 [node name="Player" parent="." unique_id=1318801478 instance=ExtResource("1_x6ivy")]
+position = Vector2(-18, -23)
+platform_wall_layers = 1
+energy = SubResource("Resource_dd0lh")
 
 [node name="EnemySpawns" type="Node2D" parent="." unique_id=330915556]
 

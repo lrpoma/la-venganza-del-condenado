@@ -6,14 +6,20 @@
 [ext_resource type="Script" uid="uid://bkxkgnre6nmo2" path="res://scenes/player/states/dog_state.gd" id="4_npwbq"]
 [ext_resource type="Script" uid="uid://de78patnimgke" path="res://scenes/player/states/whirlwind_state.gd" id="5_v42im"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_13mor"]
+radius = 3.2999992
+height = 12.799999
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tpg5x"]
+
 [node name="Player" type="CharacterBody2D" unique_id=1318801478]
-position = Vector2(416, 287)
 input_pickable = true
 script = ExtResource("1_wr5hl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1912866221]
 position = Vector2(2, 5)
 scale = Vector2(10, 10)
+shape = SubResource("CapsuleShape2D_13mor")
 debug_color = Color(0.89798, 0.0335171, 0.761016, 0.41960785)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1906071189]
@@ -30,9 +36,11 @@ position = Vector2(28, 54)
 position = Vector2(7, 4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea" unique_id=412086345]
+shape = SubResource("CapsuleShape2D_tpg5x")
 
 [node name="StateMachine" type="Node" parent="." unique_id=766325740]
 script = ExtResource("2_tpg5x")
+initial_state = NodePath("HumanState")
 
 [node name="HumanState" type="Node" parent="StateMachine" unique_id=1695239467]
 script = ExtResource("3_c3xxp")
