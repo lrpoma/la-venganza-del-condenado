@@ -1,3 +1,4 @@
+# ===== game_manager.gd (Autoload) =====
 extends Node
 
 signal player_form_changed(new_form: String)

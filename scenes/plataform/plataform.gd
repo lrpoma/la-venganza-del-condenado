@@ -1,8 +1,9 @@
+# ===== platform.gd =====
 extends StaticBody2D
 class_name Platform
 
 @export var size: Vector2 = Vector2(128, 32)
-@export var color: Color = Color(0.35, 0.32, 0.28)  # gris-tierra, placeholder
+@export var color: Color = Color(0.35, 0.32, 0.28)
 
 func _ready() -> void:
 	add_to_group("floor")

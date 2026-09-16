@@ -1,10 +1,11 @@
+# ===== dog_state.gd =====
 extends State
 class_name DogState
 
 const SPEED := 260.0
 const JUMP_VELOCITY := -340.0
 const GRAVITY := 900.0
-const DRAIN_PER_SECOND := 10.0  # GDD: -10 EE/s
+const DRAIN_PER_SECOND := 10.0
 const BITE_DAMAGE := 20.0
 
 func enter() -> void:

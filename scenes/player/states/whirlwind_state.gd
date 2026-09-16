@@ -1,8 +1,9 @@
+# ===== whirlwind_state.gd =====
 extends State
 class_name WhirlwindState
 
 const SPEED := 320.0
-const DRAIN_PER_SECOND := 30.0  # GDD: -30 EE/s
+const DRAIN_PER_SECOND := 30.0
 
 func enter() -> void:
 	print("Cambiando a: Remolino")
@@ -13,7 +14,7 @@ func exit() -> void:
 
 func physics_update(delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	player.velocity = direction * SPEED  # sin gravedad: gravity=0 mientras esta activo
+	player.velocity = direction * SPEED
 	player.move_and_slide()
 
 	player.energy.drain(DRAIN_PER_SECOND * delta)

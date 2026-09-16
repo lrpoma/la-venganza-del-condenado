@@ -1,3 +1,4 @@
+# ===== salt_zone.gd =====
 extends Area2D
 class_name SaltZone
 
@@ -23,7 +24,7 @@ func _add_visual() -> void:
 		var rect := ColorRect.new()
 		rect.size = shape.size
 		rect.position = -shape.size / 2.0
-		rect.color = Color(0.9, 0.85, 0.3, 0.45)  # sal/incienso, semitransparente
+		rect.color = Color(0.9, 0.85, 0.3, 0.45)
 		rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		$CollisionShape2D.add_child(rect)
 

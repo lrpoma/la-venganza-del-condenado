@@ -1,3 +1,4 @@
+# ===== hud.gd =====
 extends CanvasLayer
 
 @onready var energy_bar: ProgressBar = $EnergyBar
@@ -11,6 +12,4 @@ func _on_energy_updated(current: float, max_energy: float) -> void:
 	energy_bar.value = current
 
 func _on_form_changed(new_form: String) -> void:
-	# Placeholder: aquí puedes cambiar el color de la barra según la forma
-	# (ej. verde en Humano, naranja en Perro, morado en Remolino)
 	pass

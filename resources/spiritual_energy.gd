@@ -1,3 +1,4 @@
+# ===== spiritual_energy.gd =====
 extends Resource
 class_name SpiritualEnergy
 

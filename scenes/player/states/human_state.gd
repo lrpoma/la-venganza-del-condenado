@@ -1,3 +1,4 @@
+# ===== human_state.gd =====
 extends State
 class_name HumanState
 
@@ -18,7 +19,7 @@ func physics_update(delta: float) -> void:
 	player.velocity.x = direction * SPEED
 	player.move_and_slide()
 
-	player.energy.restore(5.0 * delta)  # GDD: +5 EE/s
+	player.energy.restore(5.0 * delta)
 
 func handle_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shift_dog"):

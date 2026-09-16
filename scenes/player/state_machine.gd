@@ -1,3 +1,4 @@
+# ===== state_machine.gd =====
 extends Node
 class_name StateMachine
 
