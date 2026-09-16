@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://clh8uaxxhqsbl"]
+
+[ext_resource type="Script" uid="uid://bkivojy81s1h6" path="res://enemies/enemy.gd" id="1_fw1ev"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x4ssu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x4ssu"]
+radius = 95.0
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1279457107]
+script = ExtResource("1_fw1ev")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=791321631]
+shape = SubResource("CapsuleShape2D_x4ssu")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=746648064]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=402964422]
+shape = SubResource("CircleShape2D_x4ssu")
+
+[node name="PatrolA" type="Marker2D" parent="." unique_id=6860546]
+position = Vector2(-216, 0)
+
+[node name="PatrolB" type="Marker2D" parent="." unique_id=1821761498]
+position = Vector2(233, 0)

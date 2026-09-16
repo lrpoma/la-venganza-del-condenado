@@ -2,10 +2,10 @@ extends State
 class_name WhirlwindState
 
 const SPEED := 320.0
+const DRAIN_PER_SECOND := 30.0  # GDD: -30 EE/s
 
 func enter() -> void:
-	player.get_node("AnimatedSprite2D").play("whirlwind_spin")
-	# El remolino ignora el daño de los caminos de sal (regla de diseño Alpha)
+	print("Cambiando a: Remolino")
 	player.set_meta("immune_to_salt", true)
 
 func exit() -> void:
@@ -13,13 +13,15 @@ func exit() -> void:
 
 func physics_update(delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	player.velocity = direction * SPEED
+	player.velocity = direction * SPEED  # sin gravedad: gravity=0 mientras esta activo
 	player.move_and_slide()
 
-	player.energy.consume(15.0 * delta)  # forma más costosa
+	player.energy.drain(DRAIN_PER_SECOND * delta)
 	if player.energy.current_energy <= 0.0:
 		state_machine.transition_to("humanstate")
 
 func handle_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shift_human"):
 		state_machine.transition_to("humanstate")
+	elif event.is_action_pressed("shift_dog"):
+		state_machine.transition_to("dogstate")

@@ -16,6 +16,12 @@ func consume(amount: float) -> bool:
 		energy_depleted.emit()
 	return true
 
+func drain(amount: float) -> void:
+	current_energy = max(0.0, current_energy - amount)
+	energy_changed.emit(current_energy, max_energy)
+	if current_energy <= 0.0:
+		energy_depleted.emit()
+
 func restore(amount: float) -> void:
 	current_energy = min(max_energy, current_energy + amount)
 	energy_changed.emit(current_energy, max_energy)

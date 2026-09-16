@@ -7,8 +7,8 @@
 [ext_resource type="Script" uid="uid://de78patnimgke" path="res://scenes/player/states/whirlwind_state.gd" id="5_v42im"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_13mor"]
-radius = 3.2999992
-height = 12.799999
+radius = 1.3
+height = 3.1999998
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tpg5x"]
 
@@ -17,25 +17,26 @@ input_pickable = true
 script = ExtResource("1_wr5hl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1912866221]
-position = Vector2(2, 5)
+position = Vector2(5.9604645e-08, 3.0000002)
 scale = Vector2(10, 10)
 shape = SubResource("CapsuleShape2D_13mor")
 debug_color = Color(0.89798, 0.0335171, 0.761016, 0.41960785)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1906071189]
-offset_left = -5.0
-offset_top = -7.0
-offset_right = 30.0
-offset_bottom = 28.0
+offset_left = -17.5
+offset_top = -17.5
+offset_right = 17.5
+offset_bottom = 17.5
 color = Color(0, 0, 1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=552781535]
-position = Vector2(28, 54)
+position = Vector2(199, -107)
 
 [node name="HurtboxArea" type="Area2D" parent="." unique_id=916379189]
 position = Vector2(7, 4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea" unique_id=412086345]
+position = Vector2(-7, -4)
 shape = SubResource("CapsuleShape2D_tpg5x")
 
 [node name="StateMachine" type="Node" parent="." unique_id=766325740]

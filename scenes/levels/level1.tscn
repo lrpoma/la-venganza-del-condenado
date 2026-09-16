@@ -4,10 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://7p850f5y4bfk" path="res://scenes/player/Player.tscn" id="1_x6ivy"]
 [ext_resource type="Script" uid="uid://bf2rc6hlv4x4x" path="res://scenes/levels/salt_zone.gd" id="2_dd0lh"]
 [ext_resource type="Script" uid="uid://r1f82iruvhl7" path="res://resources/spiritual_energy.gd" id="4_bfxgj"]
+[ext_resource type="Script" uid="uid://bx7jf86hi7koa" path="res://scenes/levels/hud.gd" id="5_dywbp"]
+[ext_resource type="PackedScene" uid="uid://76bjk48bhcid" path="res://scenes/plataform/plataform.tscn" id="6_1seuy"]
+[ext_resource type="PackedScene" uid="uid://clh8uaxxhqsbl" path="res://enemies/enemy.tscn" id="7_2r1tl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j65aw"]
+size = Vector2(163, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmvmn"]
+size = Vector2(139, 39)
 
 [sub_resource type="Resource" id="Resource_dd0lh"]
 script = ExtResource("4_bfxgj")
@@ -24,23 +29,47 @@ script = ExtResource("1_4tcl0")
 script = ExtResource("2_dd0lh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SaltPaths/SaltZone1" unique_id=473481486]
+position = Vector2(669, 364)
 shape = SubResource("RectangleShape2D_j65aw")
+debug_color = Color(0, 0.5509262, 0.9220985, 0.41960785)
 
 [node name="SaltZone2" type="Area2D" parent="SaltPaths" unique_id=409490923]
 script = ExtResource("2_dd0lh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SaltPaths/SaltZone2" unique_id=1928452393]
+position = Vector2(395, 364)
 shape = SubResource("RectangleShape2D_pmvmn")
 
-[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=461948301]
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=461948301 groups=["player_spawn"]]
+position = Vector2(67, 364)
 
 [node name="Player" parent="." unique_id=1318801478 instance=ExtResource("1_x6ivy")]
-position = Vector2(-18, -23)
+top_level = true
+position = Vector2(67, 364)
 platform_wall_layers = 1
 energy = SubResource("Resource_dd0lh")
 
 [node name="EnemySpawns" type="Node2D" parent="." unique_id=330915556]
 
 [node name="NPCSpawns" type="Node2D" parent="." unique_id=847114515]
+position = Vector2(714, 271)
 
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=1795297538]
+script = ExtResource("5_dywbp")
+
+[node name="EnergyBar" type="ProgressBar" parent="HUDLayer" unique_id=1658259193]
+offset_left = 16.0
+offset_top = 18.0
+offset_right = 216.0
+offset_bottom = 45.0
+offset_transform_position = Vector2(20, 20)
+theme_override_colors/font_color = Color(0.4862745, 0.047058824, 0.92941177, 1)
+value = 100.0
+
+[node name="Plataform" parent="." unique_id=1427987722 instance=ExtResource("6_1seuy")]
+position = Vector2(16, 378)
+size = Vector2(4000, 32)
+color = Color(0.15163454, 0.18034568, 0.16248605, 1)
+
+[node name="Enemy" parent="." unique_id=1279457107 instance=ExtResource("7_2r1tl")]
+position = Vector2(1265, 378)

@@ -2,24 +2,26 @@ extends State
 class_name HumanState
 
 const SPEED := 150.0
+const JUMP_VELOCITY := -280.0
+const GRAVITY := 900.0
 
 func enter() -> void:
-	player.get_node("AnimatedSprite2D").play("human_idle")
+	print("Cambiando a: Humano")
 
 func physics_update(delta: float) -> void:
-	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	player.velocity = direction * SPEED
+	if not player.is_on_floor():
+		player.velocity.y += GRAVITY * delta
+	elif Input.is_action_just_pressed("jump"):
+		player.velocity.y = JUMP_VELOCITY
+
+	var direction := Input.get_axis("move_left", "move_right")
+	player.velocity.x = direction * SPEED
 	player.move_and_slide()
 
-	if direction.length() > 0.1:
-		player.get_node("AnimatedSprite2D").play("human_walk")
-	else:
-		player.get_node("AnimatedSprite2D").play("human_idle")
+	player.energy.restore(5.0 * delta)  # GDD: +5 EE/s
 
 func handle_input(event: InputEvent) -> void:
-	if event.is_action_pressed("shift_dog") and player.energy.has_enough(10.0):
-		player.energy.consume(10.0)
+	if event.is_action_pressed("shift_dog"):
 		state_machine.transition_to("dogstate")
-	elif event.is_action_pressed("shift_whirlwind") and player.energy.has_enough(25.0):
-		player.energy.consume(25.0)
+	elif event.is_action_pressed("shift_whirlwind"):
 		state_machine.transition_to("whirlwindstate")
