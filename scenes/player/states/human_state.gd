@@ -1,28 +1,27 @@
 # ===== human_state.gd =====
+# Forma Humana: lenta, salto corto, sin ataque, regenera EE pasivamente (+5/s).
 extends State
 class_name HumanState
 
-const SPEED := 150.0
-const JUMP_VELOCITY := -280.0
-const GRAVITY := 900.0
+const SPEED := 120.0
+const REGEN_PER_SECOND := 5.0
+const JUMP_VELOCITY := -470.0  # salto corto (~74 px); el Perro llega a ~136 px
 
 func enter() -> void:
-	print("Cambiando a: Humano")
+	player.set_form("human")
 
 func physics_update(delta: float) -> void:
 	if not player.is_on_floor():
-		player.velocity.y += GRAVITY * delta
+		player.velocity.y += Player.GRAVITY * delta
 	elif Input.is_action_just_pressed("jump"):
 		player.velocity.y = JUMP_VELOCITY
 
 	var direction := Input.get_axis("move_left", "move_right")
-	player.velocity.x = direction * SPEED
+	player.velocity.x = direction * SPEED + player.knockback.x
+	player.update_facing(direction)
 	player.move_and_slide()
 
-	player.energy.restore(5.0 * delta)
+	player.energy.restore(REGEN_PER_SECOND * delta)
 
 func handle_input(event: InputEvent) -> void:
-	if event.is_action_pressed("shift_dog"):
-		state_machine.transition_to("dogstate")
-	elif event.is_action_pressed("shift_whirlwind"):
-		state_machine.transition_to("whirlwindstate")
+	handle_shift_input(event)

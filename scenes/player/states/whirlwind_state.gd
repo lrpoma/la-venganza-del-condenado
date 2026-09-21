@@ -1,28 +1,26 @@
 # ===== whirlwind_state.gd =====
+# Forma Remolino: sin gravedad, vuelo libre, inmune al daño sagrado. Drena EE (-30/s).
 extends State
 class_name WhirlwindState
 
-const SPEED := 320.0
+const SPEED := 300.0
 const DRAIN_PER_SECOND := 30.0
 
 func enter() -> void:
-	print("Cambiando a: Remolino")
-	player.set_meta("immune_to_salt", true)
+	player.set_form("whirlwind")
+	player.velocity = Vector2.ZERO
+	Audio.start_loop("wind", -8.0)
 
 func exit() -> void:
-	player.set_meta("immune_to_salt", false)
+	Audio.stop_loop("wind")
 
 func physics_update(delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	player.velocity = direction * SPEED
+	player.velocity = direction * SPEED + player.knockback
+	player.update_facing(direction.x)
 	player.move_and_slide()
 
-	player.energy.drain(DRAIN_PER_SECOND * delta)
-	if player.energy.current_energy <= 0.0:
-		state_machine.transition_to("humanstate")
+	player.drain_energy(DRAIN_PER_SECOND, delta)
 
 func handle_input(event: InputEvent) -> void:
-	if event.is_action_pressed("shift_human"):
-		state_machine.transition_to("humanstate")
-	elif event.is_action_pressed("shift_dog"):
-		state_machine.transition_to("dogstate")
+	handle_shift_input(event)

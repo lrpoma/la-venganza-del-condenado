@@ -1,53 +1,51 @@
-[gd_scene format=3 uid="uid://7p850f5y4bfk"]
+[gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://c6u0xeo7wvhtb" path="res://scenes/player/player.gd" id="1_wr5hl"]
-[ext_resource type="Script" uid="uid://c6iytatdbp3ip" path="res://scenes/player/state_machine.gd" id="2_tpg5x"]
-[ext_resource type="Script" uid="uid://csxu25ajp5vby" path="res://scenes/player/states/human_state.gd" id="3_c3xxp"]
-[ext_resource type="Script" uid="uid://bkxkgnre6nmo2" path="res://scenes/player/states/dog_state.gd" id="4_npwbq"]
-[ext_resource type="Script" uid="uid://de78patnimgke" path="res://scenes/player/states/whirlwind_state.gd" id="5_v42im"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_player"]
+[ext_resource type="Script" path="res://scenes/player/state_machine.gd" id="2_sm"]
+[ext_resource type="Script" path="res://scenes/player/states/human_state.gd" id="3_human"]
+[ext_resource type="Script" path="res://scenes/player/states/dog_state.gd" id="4_dog"]
+[ext_resource type="Script" path="res://scenes/player/states/whirlwind_state.gd" id="5_whirl"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_13mor"]
-radius = 1.3
-height = 3.1999998
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(30, 68)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tpg5x"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bite"]
+size = Vector2(70, 50)
 
-[node name="Player" type="CharacterBody2D" unique_id=1318801478]
-input_pickable = true
-script = ExtResource("1_wr5hl")
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_player")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1912866221]
-position = Vector2(5.9604645e-08, 3.0000002)
-scale = Vector2(10, 10)
-shape = SubResource("CapsuleShape2D_13mor")
-debug_color = Color(0.89798, 0.0335171, 0.761016, 0.41960785)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -34)
+shape = SubResource("RectangleShape2D_body")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1906071189]
-offset_left = -17.5
-offset_top = -17.5
-offset_right = 17.5
-offset_bottom = 17.5
-color = Color(0, 0, 1, 1)
+[node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=552781535]
-position = Vector2(199, -107)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -60)
+zoom = Vector2(1.25, 1.25)
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
 
-[node name="HurtboxArea" type="Area2D" parent="." unique_id=916379189]
-position = Vector2(7, 4)
+[node name="BiteArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea" unique_id=412086345]
-position = Vector2(-7, -4)
-shape = SubResource("CapsuleShape2D_tpg5x")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BiteArea"]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_bite")
 
-[node name="StateMachine" type="Node" parent="." unique_id=766325740]
-script = ExtResource("2_tpg5x")
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_sm")
 initial_state = NodePath("HumanState")
 
-[node name="HumanState" type="Node" parent="StateMachine" unique_id=1695239467]
-script = ExtResource("3_c3xxp")
+[node name="HumanState" type="Node" parent="StateMachine"]
+script = ExtResource("3_human")
 
-[node name="DogState" type="Node" parent="StateMachine" unique_id=1725876973]
-script = ExtResource("4_npwbq")
+[node name="DogState" type="Node" parent="StateMachine"]
+script = ExtResource("4_dog")
 
-[node name="WhirlwindState" type="Node" parent="StateMachine" unique_id=2145506852]
-script = ExtResource("5_v42im")
+[node name="WhirlwindState" type="Node" parent="StateMachine"]
+script = ExtResource("5_whirl")
