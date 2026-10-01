@@ -6,7 +6,7 @@ class_name DogState
 const SPEED := 280.0
 const JUMP_VELOCITY := -640.0
 const DRAIN_PER_SECOND := 10.0
-const BITE_DAMAGE := 120.0
+const BITE_DAMAGE := 35.0
 
 func enter() -> void:
 	player.set_form("dog")
